@@ -37,19 +37,20 @@ export default function App() {
 						<div
 							style={{ display: "flex", alignItems: "center", height: "100%" }}
 						>
-							<Text>Application header</Text>
+							<Text>Watch</Text>
+							<Text style={{ paddingLeft: 60 }}>Upload</Text>
 						</div>
 					</Header>
 				}
 			>
 				<BrowserRouter>
 					<Routes>
-						<Route path="/" element={<VideoList />}>
-							{/* <Route index element={<Home />} />
+						<Route path="/" element={<VideoList />} />
+						{/* <Route index element={<Home />} />
 						<Route path="blogs" element={<Blogs />} />
 						<Route path="contact" element={<Contact />} />
 						<Route path="*" element={<NoPage />} /> */}
-						</Route>
+						<Route path="/video/:id" element={<VideoPage />} />
 					</Routes>
 				</BrowserRouter>
 			</AppShell>

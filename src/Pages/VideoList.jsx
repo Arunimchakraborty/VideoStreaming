@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@mantine/core";
 import AWS from "aws-sdk";
 import VideoThumbnail from "react-video-thumbnail"; // use npm published version
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 import {
 	Card,
@@ -79,6 +80,8 @@ const useStyles = createStyles((theme) => ({
 		borderBottom: `1px solid ${
 			theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
 		}`,
+		maxWidth: 20,
+		maxHeight: 250,
 	},
 
 	label: {
@@ -114,6 +117,8 @@ const mockdata = [
 ];
 
 function VideoCard(props) {
+
+	const navigate = useNavigate();
 	const { classes } = useStyles();
 	const features = mockdata.map((feature) => (
 		<Center key={feature.label}>
@@ -124,10 +129,10 @@ function VideoCard(props) {
 
 	return (
 		<Card withBorder radius="md" className={classes.card}>
-			<Card.Section className={classes.imageSection}>
-				{/* <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" /> */}
-				<Thumbnail url={props.url} />
-			</Card.Section>
+			{/* <Card.Section className={classes.imageSection}> */}
+			{/* <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" /> */}
+			{/* <Thumbnail url={props.url} height={300} width={300} /> */}
+			{/* </Card.Section> */}
 
 			<Group position="center" mt="md">
 				<div>
@@ -137,7 +142,7 @@ function VideoCard(props) {
 
 			<Card.Section className={classes.section}>
 				<Group spacing={30}>
-					<Button radius="xl" style={{ flex: 1 }}>
+					<Button radius="xl" style={{ flex: 1 }} onClick={() => {navigate(`video/${props.name}`)}}>
 						Watch now
 					</Button>
 				</Group>
@@ -218,7 +223,7 @@ export default function VideoList() {
 	return (
 		<Grid>
 			{arrayData.map((e) => {
-				console.log(`${process.env.REACT_APP_LOC}/${e.Key}`);
+				console.log(`${process.env.REACT_APP_LOC}${e.Key}`);
 				return (
 					<Grid.Col key={e.ETag} span={4}>
 						<VideoCard name={e.Key} url={`${backendLoc}${e.Key}`} />
