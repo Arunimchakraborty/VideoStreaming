@@ -10,15 +10,19 @@ import {
 	Burger,
 	useMantineTheme,
 	MantineProvider,
+	UnstyledButton,
 } from "@mantine/core";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from "./Pages/SignUp";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import HeaderSec from "./Pages/Header";
 import VideoList from "./Pages/VideoList";
 import VideoPage from "./Pages/VideoPage";
+import { Outlet, Link } from "react-router-dom";
+import UploadVideo from "./Pages/UploadVideo";
 
 export default function App() {
 	const theme = useMantineTheme();
 	const [opened, setOpened] = useState(false);
+	const navigate = useNavigate();
 	return (
 		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<AppShell
@@ -37,23 +41,27 @@ export default function App() {
 						<div
 							style={{ display: "flex", alignItems: "center", height: "100%" }}
 						>
-							<Text>Watch</Text>
-							<Text style={{ paddingLeft: 60 }}>Upload</Text>
+							<UnstyledButton onClick={() => navigate('/')}>
+								<Text>Watch</Text>
+							</UnstyledButton>
+							<UnstyledButton onClick={() => navigate('/upload')}>
+								<Text style={{ paddingLeft: 60 }}>Upload</Text>
+							</UnstyledButton>
 						</div>
 					</Header>
 				}
 			>
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<VideoList />} />
-						{/* <Route index element={<Home />} />
+				<Routes>
+					<Route path="/" element={<VideoList />} />
+					<Route path="/upload" element={<UploadVideo />} />
+					{/* <Route index element={<Home />} />
 						<Route path="blogs" element={<Blogs />} />
 						<Route path="contact" element={<Contact />} />
 						<Route path="*" element={<NoPage />} /> */}
-						<Route path="/video/:id" element={<VideoPage />} />
-					</Routes>
-				</BrowserRouter>
+					<Route path="/video/:id" element={<VideoPage />} />
+				</Routes>
 			</AppShell>
+			<Outlet />
 		</MantineProvider>
 	);
 }
