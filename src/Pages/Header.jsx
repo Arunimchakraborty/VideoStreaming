@@ -13,6 +13,9 @@ export default function HeaderSec() {
 				<UnstyledButton>
 					<Text style={{ paddingLeft: 60 }}>Upload</Text>
 				</UnstyledButton>
+				<UnstyledButton>
+					<Text style={{ paddingLeft: 60 }}>User</Text>
+				</UnstyledButton>
 			</div>
 		</Header>
 	);
