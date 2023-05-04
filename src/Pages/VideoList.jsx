@@ -1,70 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "@mantine/core";
 import AWS from "aws-sdk";
-import VideoThumbnail from "react-video-thumbnail"; // use npm published version
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
 	Card,
-	Image,
 	Text,
 	Group,
-	Badge,
 	createStyles,
-	Center,
 	Button,
 } from "@mantine/core";
-import {
-	IconGasStation,
-	IconGauge,
-	IconManualGearbox,
-	IconUsers,
-} from "@tabler/icons-react";
 
 var backendLoc = require("../config");
-
-const demoArray = [
-	{
-		name: "Video 1",
-		length: 10,
-		id: 1,
-	},
-	{
-		name: "Video 2",
-		length: 10,
-		id: 2,
-	},
-	{
-		name: "Video 3",
-		length: 10,
-		id: 3,
-	},
-	{
-		name: "Video 4",
-		length: 10,
-		id: 4,
-	},
-	{
-		name: "Video 4",
-		length: 10,
-		id: 4,
-	},
-	{
-		name: "Video 4",
-		length: 10,
-		id: 4,
-	},
-	{
-		name: "Video 4",
-		length: 10,
-		id: 4,
-	},
-	{
-		name: "Video 4",
-		length: 10,
-		id: 4,
-	},
-];
 
 const useStyles = createStyles((theme) => ({
 	card: {
@@ -109,23 +56,10 @@ const useStyles = createStyles((theme) => ({
 	},
 }));
 
-const mockdata = [
-	{ label: "4 passengers", icon: IconUsers },
-	{ label: "100 km/h in 4 seconds", icon: IconGauge },
-	{ label: "Automatic gearbox", icon: IconManualGearbox },
-	{ label: "Electric", icon: IconGasStation },
-];
-
 function VideoCard(props) {
 
 	const navigate = useNavigate();
 	const { classes } = useStyles();
-	const features = mockdata.map((feature) => (
-		<Center key={feature.label}>
-			<feature.icon size={18} className={classes.icon} stroke={1.5} />
-			<Text size="xs">{feature.label}</Text>
-		</Center>
-	));
 
 	return (
 		<Card withBorder radius="md" className={classes.card}>
@@ -174,31 +108,6 @@ async function listBucketObjects() {
 	});
 }
 
-function createVideoLink(key) {
-	// Set the S3 bucket and video file key
-	const params = { Bucket: bucketName, Key: key };
-
-	// Retrieve the video file from S3
-	s3.getObject(params, (err, data) => {
-		if (err) {
-			console.log(err);
-		} else {
-			// Create a URL object from the video data and set it as the source for the video player
-			const videoBlob = new Blob([data.Body], { type: data.ContentType });
-			const videoUrl = URL.createObjectURL(videoBlob);
-			console.log(videoUrl);
-			return videoUrl;
-		}
-	});
-}
-
-function Thumbnail(props) {
-	return (
-		<div>
-			<VideoThumbnail videoUrl={props.url} />
-		</div>
-	);
-}
 
 // Call the function to list all objects in the bucket
 // listBucketObjects();

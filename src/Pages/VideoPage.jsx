@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../node_modules/video-react/dist/video-react.css"; // import css
 import { Player } from "video-react";
 import { Center } from "@mantine/core";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const backendLoc = require("../config");
 
 export default function VideoPage(props) {

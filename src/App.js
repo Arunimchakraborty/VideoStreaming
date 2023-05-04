@@ -1,27 +1,19 @@
-import { useState } from "react";
 import {
 	AppShell,
-	Navbar,
 	Header,
-	Footer,
-	Aside,
 	Text,
-	MediaQuery,
-	Burger,
 	useMantineTheme,
 	MantineProvider,
 	UnstyledButton,
 } from "@mantine/core";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import HeaderSec from "./Pages/Header";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import VideoList from "./Pages/VideoList";
 import VideoPage from "./Pages/VideoPage";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import UploadVideo from "./Pages/UploadVideo";
 
 export default function App() {
 	const theme = useMantineTheme();
-	const [opened, setOpened] = useState(false);
 	const navigate = useNavigate();
 	return (
 		<MantineProvider withGlobalStyles withNormalizeCSS>
